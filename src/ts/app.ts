@@ -12,5 +12,5 @@ console.log(cart.items);
 console.log(cart.sum());
 console.log(cart.discountPrice(10));
 
-cart.delete(10001);
+cart.delete(1);
 console.log(cart.items);

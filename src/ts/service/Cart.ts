@@ -13,24 +13,20 @@ export default class Cart {
 
     //суммарная стоимость без учёта скидки
     sum(): number {
-        let sumPrice = 0;
-        for(let item of this._items) {
-            sumPrice += item.price;
-        }
-        return sumPrice; 
+        let initialValue = 0;
+        const sum = this._items.reduce(function (accumulator, currentValue) {
+            return accumulator + currentValue.price;
+        }, initialValue);
+        return sum;
     }
 
     //суммарная стоимость с учётом скидки
     discountPrice(discount: number): number {
-        let percent = 100 - discount;
-        let res = (this.sum() * percent)/100;
-        return res;
+        const percent = 100 - discount;
+        return (this.sum() * percent)/100;
     }
 
     delete(id: number): void {
-        const index = this._items.findIndex(item => item.id === id);
-        if (index !== -1) {
-            this._items.splice(index, 1);
-        }
+        this._items = this._items.filter((item: Buyable) => item.id !== id);
     }
 }
